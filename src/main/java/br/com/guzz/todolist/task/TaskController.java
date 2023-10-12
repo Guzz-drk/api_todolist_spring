@@ -1,4 +1,4 @@
-package br.com.guzz.todolist.user;
+package br.com.guzz.todolist.task;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,21 +13,22 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping(value = "/users", produces = {"application/json"})
-@Tag(name = "User")
-public class UserController {
+@RequestMapping(value = "/tasks", produces = {"application/json"})
+@Tag(name = "Task")
+public class TaskController {
     
     @Autowired
-    private UserService userService;
+    private TaskService taskService;
 
     @PostMapping(value = "/", consumes = "application/json")
-    @Operation(summary = "Realizada a criação de um usuário", method = "POST")
+    @Operation(summary = "Realizada a criação de uma tarefa", method = "POST")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "201", description = "Usuário criado com sucesso!"),
-        @ApiResponse(responseCode = "404", description = "Erro ao criar usuário, username já existe!"),
+        @ApiResponse(responseCode = "201", description = "Tarefa criada com sucesso!"),
+        @ApiResponse(responseCode = "404", description = "Erro ao criar tarefa"),
         @ApiResponse(responseCode = "500", description = "Erro interno do serviço!")
     })
-    public ResponseEntity<?> create(@RequestBody UserModel userModel){
-        return userService.createUser(userModel);
+    public ResponseEntity<?> create(@RequestBody TaskModel taskModel){
+        var task = this.taskService.createTask(taskModel);
+        return task;
     }
 }
