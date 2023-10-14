@@ -36,6 +36,11 @@ public class FilterTaskAuth extends OncePerRequestFilter{
             var authString = new String(authDecoded);
 
             String[] credentials = authString.split(":");
+            
+            if(credentials.length == 0){
+                response.sendError(401, "Credenciais Inválidas!");
+            }
+
             String username = credentials[0];
             String password = credentials[1];
 
