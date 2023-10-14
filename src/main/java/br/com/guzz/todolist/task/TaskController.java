@@ -55,7 +55,7 @@ public class TaskController {
         @ApiResponse(responseCode = "200", description = "Update realizado com sucesso!"),
         @ApiResponse(responseCode = "500", description = "Erro interno do serviço!")
     })
-    public TaskModel update(@RequestBody TaskModel taskModel, HttpServletRequest request, @PathVariable UUID id){
+    public ResponseEntity<?> update(@RequestBody TaskModel taskModel, HttpServletRequest request, @PathVariable UUID id){
         return this.taskService.updateTask(taskModel, request, id);
     }
 }

@@ -9,7 +9,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +18,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 @Entity(name = "tb_tasks")
-@Table(schema = "guzz", name = "tb_tasks")
 public class TaskModel {
     
     @Id
@@ -36,4 +34,11 @@ public class TaskModel {
 
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+    public void setTitle(String title) throws Exception{
+        if(title.length() > 50){
+            throw new Exception("O campo title deve conter no máximo 50 caracteres");
+        }
+        this.title = title;
+    }
 }
